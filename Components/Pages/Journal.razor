@@ -1,0 +1,63 @@
+﻿@page "/journal"
+@inject Coursework.Services.JournalService JournalService
+@using Coursework.Models
+
+<h3>Today’s Journal</h3>
+<p><strong>Date:</strong> @DateTime.Today.ToString("dd MMM yyyy")</p>
+
+<textarea rows="6" @bind="entry.Content" class="form-control"></textarea>
+
+<br />
+
+<label><strong>Primary Mood (Required)</strong></label>
+<select @bind="entry.PrimaryMood" class="form-select">
+    <option value="">-- Select Mood --</option>
+    <option>Happy</option>
+    <option>Excited</option>
+    <option>Calm</option>
+    <option>Sad</option>
+    <option>Stressed</option>
+</select>
+
+<br />
+
+<label>Secondary Mood 1 (Optional)</label>
+<select @bind="entry.SecondaryMood1" class="form-select">
+    <option value="">None</option>
+    <option>Relaxed</option>
+    <option>Grateful</option>
+    <option>Anxious</option>
+    <option>Bored</option>
+</select>
+
+<br />
+
+
+<button class="btn btn-success" @onclick="SaveEntry" disabled="@string.IsNullOrWhiteSpace(entry.PrimaryMood)">
+    Save Entry
+</button>
+
+@if (!string.IsNullOrEmpty(message))
+{
+    <p style="color:green">@message</p>
+}
+
+@code {
+    JournalEntry entry = new();
+    string message = "";
+
+    protected override void OnInitialized()
+    {
+        var today = JournalService.GetTodayEntry();
+        if (today != null)
+            entry = today;
+    }
+
+    void SaveEntry()
+    {
+        JournalService.Save(entry);
+        message = "Journal saved successfully.";
+    }
+   
+
+}

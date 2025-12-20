@@ -1,0 +1,238 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\bhatt\\OneDrive\\Documents\\Coursework\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{69C08C50-F1DF-4848-A959-2BF45BCF20E1}|Coursework.csproj|c:\\users\\bhatt\\onedrive\\documents\\coursework\\components\\pages\\journal.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{69C08C50-F1DF-4848-A959-2BF45BCF20E1}|Coursework.csproj|solutionrelative:components\\pages\\journal.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69C08C50-F1DF-4848-A959-2BF45BCF20E1}|Coursework.csproj|c:\\users\\bhatt\\onedrive\\documents\\coursework\\data\\databaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69C08C50-F1DF-4848-A959-2BF45BCF20E1}|Coursework.csproj|solutionrelative:data\\databaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69C08C50-F1DF-4848-A959-2BF45BCF20E1}|Coursework.csproj|c:\\users\\bhatt\\onedrive\\documents\\coursework\\models\\journalentry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69C08C50-F1DF-4848-A959-2BF45BCF20E1}|Coursework.csproj|solutionrelative:models\\journalentry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69C08C50-F1DF-4848-A959-2BF45BCF20E1}|Coursework.csproj|c:\\users\\bhatt\\onedrive\\documents\\coursework\\services\\journalservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69C08C50-F1DF-4848-A959-2BF45BCF20E1}|Coursework.csproj|solutionrelative:services\\journalservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69C08C50-F1DF-4848-A959-2BF45BCF20E1}|Coursework.csproj|c:\\users\\bhatt\\onedrive\\documents\\coursework\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69C08C50-F1DF-4848-A959-2BF45BCF20E1}|Coursework.csproj|solutionrelative:app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69C08C50-F1DF-4848-A959-2BF45BCF20E1}|Coursework.csproj|c:\\users\\bhatt\\onedrive\\documents\\coursework\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69C08C50-F1DF-4848-A959-2BF45BCF20E1}|Coursework.csproj|solutionrelative:mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69C08C50-F1DF-4848-A959-2BF45BCF20E1}|Coursework.csproj|c:\\users\\bhatt\\onedrive\\documents\\coursework\\services\\journallistservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69C08C50-F1DF-4848-A959-2BF45BCF20E1}|Coursework.csproj|solutionrelative:services\\journallistservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69C08C50-F1DF-4848-A959-2BF45BCF20E1}|Coursework.csproj|c:\\users\\bhatt\\onedrive\\documents\\coursework\\components\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{69C08C50-F1DF-4848-A959-2BF45BCF20E1}|Coursework.csproj|solutionrelative:components\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69C08C50-F1DF-4848-A959-2BF45BCF20E1}|Coursework.csproj|c:\\users\\bhatt\\onedrive\\documents\\coursework\\components\\pages\\streaks.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{69C08C50-F1DF-4848-A959-2BF45BCF20E1}|Coursework.csproj|solutionrelative:components\\pages\\streaks.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69C08C50-F1DF-4848-A959-2BF45BCF20E1}|Coursework.csproj|c:\\users\\bhatt\\onedrive\\documents\\coursework\\services\\streakservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69C08C50-F1DF-4848-A959-2BF45BCF20E1}|Coursework.csproj|solutionrelative:services\\streakservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69C08C50-F1DF-4848-A959-2BF45BCF20E1}|Coursework.csproj|c:\\users\\bhatt\\onedrive\\documents\\coursework\\components\\pages\\journallist.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{69C08C50-F1DF-4848-A959-2BF45BCF20E1}|Coursework.csproj|solutionrelative:components\\pages\\journallist.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69C08C50-F1DF-4848-A959-2BF45BCF20E1}|Coursework.csproj|c:\\users\\bhatt\\onedrive\\documents\\coursework\\components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{69C08C50-F1DF-4848-A959-2BF45BCF20E1}|Coursework.csproj|solutionrelative:components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69C08C50-F1DF-4848-A959-2BF45BCF20E1}|Coursework.csproj|c:\\users\\bhatt\\onedrive\\documents\\coursework\\coursework.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{69C08C50-F1DF-4848-A959-2BF45BCF20E1}|Coursework.csproj|solutionrelative:coursework.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "JournalService.cs",
+              "DocumentMoniker": "C:\\Users\\bhatt\\OneDrive\\Documents\\Coursework\\Services\\JournalService.cs",
+              "RelativeDocumentMoniker": "Services\\JournalService.cs",
+              "ToolTip": "C:\\Users\\bhatt\\OneDrive\\Documents\\Coursework\\Services\\JournalService.cs*",
+              "RelativeToolTip": "Services\\JournalService.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAABRAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T00:43:17.347Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "App.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\bhatt\\OneDrive\\Documents\\Coursework\\App.xaml.cs",
+              "RelativeDocumentMoniker": "App.xaml.cs",
+              "ToolTip": "C:\\Users\\bhatt\\OneDrive\\Documents\\Coursework\\App.xaml.cs",
+              "RelativeToolTip": "App.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T00:45:57.578Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MauiProgram.cs",
+              "DocumentMoniker": "C:\\Users\\bhatt\\OneDrive\\Documents\\Coursework\\MauiProgram.cs",
+              "RelativeDocumentMoniker": "MauiProgram.cs",
+              "ToolTip": "C:\\Users\\bhatt\\OneDrive\\Documents\\Coursework\\MauiProgram.cs",
+              "RelativeToolTip": "MauiProgram.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T00:44:10.834Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "JournalEntry.cs",
+              "DocumentMoniker": "C:\\Users\\bhatt\\OneDrive\\Documents\\Coursework\\Models\\JournalEntry.cs",
+              "RelativeDocumentMoniker": "Models\\JournalEntry.cs",
+              "ToolTip": "C:\\Users\\bhatt\\OneDrive\\Documents\\Coursework\\Models\\JournalEntry.cs*",
+              "RelativeToolTip": "Models\\JournalEntry.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T00:41:21.901Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DatabaseService.cs",
+              "DocumentMoniker": "C:\\Users\\bhatt\\OneDrive\\Documents\\Coursework\\Data\\DatabaseService.cs",
+              "RelativeDocumentMoniker": "Data\\DatabaseService.cs",
+              "ToolTip": "C:\\Users\\bhatt\\OneDrive\\Documents\\Coursework\\Data\\DatabaseService.cs",
+              "RelativeToolTip": "Data\\DatabaseService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T00:42:24.136Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Journal.razor",
+              "DocumentMoniker": "C:\\Users\\bhatt\\OneDrive\\Documents\\Coursework\\Components\\Pages\\Journal.razor",
+              "RelativeDocumentMoniker": "Components\\Pages\\Journal.razor",
+              "ToolTip": "C:\\Users\\bhatt\\OneDrive\\Documents\\Coursework\\Components\\Pages\\Journal.razor",
+              "RelativeToolTip": "Components\\Pages\\Journal.razor",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAADMAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-19T00:49:03.803Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "NavMenu.razor",
+              "DocumentMoniker": "C:\\Users\\bhatt\\OneDrive\\Documents\\Coursework\\Components\\Layout\\NavMenu.razor",
+              "RelativeDocumentMoniker": "Components\\Layout\\NavMenu.razor",
+              "ToolTip": "C:\\Users\\bhatt\\OneDrive\\Documents\\Coursework\\Components\\Layout\\NavMenu.razor",
+              "RelativeToolTip": "Components\\Layout\\NavMenu.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-19T00:49:50.478Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Streaks.razor",
+              "DocumentMoniker": "C:\\Users\\bhatt\\OneDrive\\Documents\\Coursework\\Components\\Pages\\Streaks.razor",
+              "RelativeDocumentMoniker": "Components\\Pages\\Streaks.razor",
+              "ToolTip": "C:\\Users\\bhatt\\OneDrive\\Documents\\Coursework\\Components\\Pages\\Streaks.razor",
+              "RelativeToolTip": "Components\\Pages\\Streaks.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-20T02:51:13.449Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Coursework.csproj",
+              "DocumentMoniker": "C:\\Users\\bhatt\\OneDrive\\Documents\\Coursework\\Coursework.csproj",
+              "RelativeDocumentMoniker": "Coursework.csproj",
+              "ToolTip": "C:\\Users\\bhatt\\OneDrive\\Documents\\Coursework\\Coursework.csproj",
+              "RelativeToolTip": "Coursework.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-12-19T00:39:52.042Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Home.razor",
+              "DocumentMoniker": "C:\\Users\\bhatt\\OneDrive\\Documents\\Coursework\\Components\\Pages\\Home.razor",
+              "RelativeDocumentMoniker": "Components\\Pages\\Home.razor",
+              "ToolTip": "C:\\Users\\bhatt\\OneDrive\\Documents\\Coursework\\Components\\Pages\\Home.razor",
+              "RelativeToolTip": "Components\\Pages\\Home.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-19T00:36:37.169Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "JournalListService.cs",
+              "DocumentMoniker": "C:\\Users\\bhatt\\OneDrive\\Documents\\Coursework\\Services\\JournalListService.cs",
+              "RelativeDocumentMoniker": "Services\\JournalListService.cs",
+              "ToolTip": "C:\\Users\\bhatt\\OneDrive\\Documents\\Coursework\\Services\\JournalListService.cs",
+              "RelativeToolTip": "Services\\JournalListService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-20T02:37:12.074Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "StreakService.cs",
+              "DocumentMoniker": "C:\\Users\\bhatt\\OneDrive\\Documents\\Coursework\\Services\\StreakService.cs",
+              "RelativeDocumentMoniker": "Services\\StreakService.cs",
+              "ToolTip": "C:\\Users\\bhatt\\OneDrive\\Documents\\Coursework\\Services\\StreakService.cs",
+              "RelativeToolTip": "Services\\StreakService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-20T02:49:55.887Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "JournalList.razor",
+              "DocumentMoniker": "C:\\Users\\bhatt\\OneDrive\\Documents\\Coursework\\Components\\Pages\\JournalList.razor",
+              "RelativeDocumentMoniker": "Components\\Pages\\JournalList.razor",
+              "ToolTip": "C:\\Users\\bhatt\\OneDrive\\Documents\\Coursework\\Components\\Pages\\JournalList.razor",
+              "RelativeToolTip": "Components\\Pages\\JournalList.razor",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-20T02:33:32.17Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
