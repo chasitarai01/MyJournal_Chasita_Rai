@@ -1,0 +1,44 @@
+﻿@page "/calendar"
+@inject Coursework.Services.JournalCalendarService CalendarService
+@using Coursework.Models
+
+<h3>Journal Calendar</h3>
+
+<input type="date" @bind="selectedDate" />
+
+<br />
+<br />
+
+<button class="btn btn-primary" @onclick="LoadEntry">
+    Load Entry
+</button>
+
+<hr />
+
+@if (loadedEntry == null && searched)
+{
+    <p><b>No journal found for selected date.</b></p>
+}
+else if (loadedEntry != null)
+{
+    <h4>@loadedEntry.EntryDate.ToString("dd MMM yyyy")</h4>
+
+    <p><b>Mood:</b> @loadedEntry.PrimaryMood</p>
+
+    <p><b>Content:</b></p>
+    <div style="white-space: pre-wrap;">
+        @loadedEntry.Content
+    </div>
+}
+
+@code {
+    DateTime selectedDate = DateTime.Today;
+    JournalEntry? loadedEntry;
+    bool searched = false;
+
+    void LoadEntry()
+    {
+        loadedEntry = CalendarService.GetEntryByDate(selectedDate);
+        searched = true;
+    }
+}

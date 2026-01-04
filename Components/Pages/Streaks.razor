@@ -1,0 +1,21 @@
+﻿@page "/streaks"
+@inject Coursework.Services.StreakService StreakService
+
+<h3>Journaling Streaks</h3>
+
+<div style="border:1px solid #ccc; padding:15px; width:300px;">
+    <p><strong>Current Streak:</strong> @current</p>
+    <p><strong>Longest Streak:</strong> @longest</p>
+    <p><strong>Missed Days:</strong> @missed</p>
+</div>
+
+@code {
+    int current;
+    int longest;
+    int missed;
+
+    protected override void OnInitialized()
+    {
+        (current, longest, missed) = StreakService.CalculateStreaks();
+    }
+}

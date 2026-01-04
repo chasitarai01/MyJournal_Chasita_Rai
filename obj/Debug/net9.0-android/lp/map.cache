@@ -184,3 +184,8 @@ androidx.print.print.aar
 androidx.localbroadcastmanager.localbroadcastmanager.aar
 androidx.documentfile.documentfile.aar
 androidx.legacy.legacy-support-core-utils.aar
+Xamarin.AndroidX.DocumentFile.dll
+Xamarin.AndroidX.Legacy.Support.Core.Utils.dll
+Xamarin.AndroidX.LocalBroadcastManager.dll
+Xamarin.AndroidX.Print.dll
+Xamarin.Kotlin.StdLib.Common.dll

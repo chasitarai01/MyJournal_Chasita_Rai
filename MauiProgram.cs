@@ -23,7 +23,10 @@ namespace Coursework
     		builder.Logging.AddDebug();
             builder.Services.AddSingleton<DatabaseService>();
             builder.Services.AddSingleton<JournalService>();
-            
+            builder.Services.AddSingleton<JournalCalendarService>();
+
+
+
 
 #endif
 

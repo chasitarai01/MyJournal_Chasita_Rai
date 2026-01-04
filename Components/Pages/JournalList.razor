@@ -1,0 +1,55 @@
+﻿@page "/journals"
+@inject Coursework.Services.JournalService JournalService
+
+<h3>Journal Entries</h3>
+
+<!-- SEARCH -->
+<input class="form-control mb-2"
+       placeholder="Search by content..."
+       @bind="searchText" />
+
+<!-- FILTER -->
+<select class="form-select mb-3" @bind="selectedMood">
+    <option value="">All Moods</option>
+    <option>Happy</option>
+    <option>Calm</option>
+    <option>Sad</option>
+    <option>Stressed</option>
+</select>
+
+<button class="btn btn-primary mb-3" @onclick="ApplyFilter">
+    Apply Search & Filter
+</button>
+
+@if (entries.Count == 0)
+{
+    <p>No journal entries found.</p>
+}
+else
+{
+    @foreach (var entry in entries)
+    {
+        <div class="card mb-2 p-2">
+            <strong>@entry.EntryDate.ToShortDateString()</strong><br />
+            <em>Mood: @entry.PrimaryMood</em>
+            <p>@entry.Content</p>
+        </div>
+    }
+}
+
+@code {
+    List<JournalEntry> entries = new();
+
+    string searchText = "";
+    string selectedMood = "";
+
+    protected override void OnInitialized()
+    {
+        entries = JournalService.SearchEntries("", "");
+    }
+
+    void ApplyFilter()
+    {
+        entries = JournalService.SearchEntries(searchText, selectedMood);
+    }
+}
