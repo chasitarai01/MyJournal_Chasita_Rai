@@ -1,0 +1,64 @@
+﻿@inject MyJournal.Services.TagService TagService
+
+<div>
+    <label><b>Tags</b></label>
+
+    <div style="display:flex; gap:8px; margin-bottom:8px;">
+        <input placeholder="Add custom tag" @bind="newTag" />
+        <button type="button" @onclick="AddTag">Add</button>
+    </div>
+
+    @if (allTags.Count == 0)
+    {
+        <p>Loading tags...</p>
+    }
+    else
+    {
+        <div style="display:flex; flex-wrap:wrap; gap:8px;">
+            @foreach (var t in allTags)
+            {
+                var selected = SelectedTagIds.Contains(t.Id);
+                <button type="button"
+                        style="padding:6px 10px; border-radius:12px; border:1px solid #888;
+                                       background:@(selected ? "#ddd" : "transparent");"
+                        @onclick="() => Toggle(t.Id)">
+                    @t.Name
+                </button>
+            }
+        </div>
+    }
+</div>
+
+@code {
+    private List<MyJournal.Models.Tag> allTags = new();
+    private string newTag = "";
+
+    [Parameter] public List<int> SelectedTagIds { get; set; } = new();
+    [Parameter] public EventCallback<List<int>> SelectedTagIdsChanged { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        allTags = await TagService.GetAllAsync();
+    }
+
+    private async Task Toggle(int id)
+    {
+        if (SelectedTagIds.Contains(id)) SelectedTagIds.Remove(id);
+        else SelectedTagIds.Add(id);
+
+        await SelectedTagIdsChanged.InvokeAsync(SelectedTagIds);
+    }
+
+    private async Task AddTag()
+    {
+        if (string.IsNullOrWhiteSpace(newTag)) return;
+        var tag = await TagService.CreateCustomAsync(newTag);
+        newTag = "";
+        allTags = await TagService.GetAllAsync();
+
+        if (!SelectedTagIds.Contains(tag.Id))
+            SelectedTagIds.Add(tag.Id);
+
+        await SelectedTagIdsChanged.InvokeAsync(SelectedTagIds);
+    }
+}

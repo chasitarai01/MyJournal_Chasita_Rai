@@ -1,0 +1,224 @@
+﻿@page "/settings"
+@inject MyJournal.Services.SettingsService SettingsService
+@inject MyJournal.Services.AppState AppState
+
+<h3>Settings</h3>
+
+<div style="display:grid; gap:16px; max-width:560px;">
+
+    <!-- THEME -->
+    <div style="border:1px solid #ddd; border-radius:12px; padding:12px;">
+        <h4 style="margin-top:0;">Theme</h4>
+
+        <select style="width:100%;" @bind="theme">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+        </select>
+
+        <div style="margin-top:10px;">
+            <button type="button" @onclick="SaveTheme">Save Theme</button>
+        </div>
+
+        @if (!string.IsNullOrWhiteSpace(themeMsg))
+        {
+            <p style="margin-top:10px;"><b>@themeMsg</b></p>
+        }
+    </div>
+
+    <!-- APP LOCK SETTINGS -->
+    <div style="border:1px solid #ddd; border-radius:12px; padding:12px;">
+        <h4 style="margin-top:0;">App Lock (PIN)</h4>
+
+        <!-- ENABLE / DISABLE LOCK -->
+        <label style="display:flex; gap:10px; align-items:center;">
+            <input type="checkbox" @bind="lockEnabled" />
+            <b>Enable App Lock (require PIN on every page)</b>
+        </label>
+
+        <div style="margin-top:10px;">
+            <button type="button" @onclick="SaveLockSetting">Save Lock Setting</button>
+        </div>
+
+        <hr style="margin:14px 0;" />
+
+        <p><b>Lock status:</b> @(lockEnabled ? "ON ✅" : "OFF ❌")</p>
+        <p><b>PIN status:</b> @(pinIsSet ? "SET ✅" : "NOT SET ❌")</p>
+
+        @if (!pinIsSet)
+        {
+            <p style="margin-top:10px;">No PIN is set.</p>
+
+            <label><b>New PIN (min 4 digits)</b></label>
+            <input type="password" style="width:100%;" @bind="newPin" />
+
+            <label style="margin-top:10px; display:block;"><b>Confirm PIN</b></label>
+            <input type="password" style="width:100%;" @bind="confirmPin" />
+
+            <div style="margin-top:10px;">
+                <button type="button" @onclick="SetPin">Set PIN</button>
+            </div>
+        }
+        else
+        {
+            <p style="margin-top:10px;">PIN is currently set.</p>
+
+            <label><b>Current PIN</b></label>
+            <input type="password" style="width:100%;" @bind="currentPin" />
+
+            <label style="margin-top:10px; display:block;"><b>New PIN</b></label>
+            <input type="password" style="width:100%;" @bind="newPin" />
+
+            <label style="margin-top:10px; display:block;"><b>Confirm New PIN</b></label>
+            <input type="password" style="width:100%;" @bind="confirmPin" />
+
+            <div style="margin-top:10px; display:flex; gap:10px;">
+                <button type="button" @onclick="ChangePin">Change PIN</button>
+                <button type="button" @onclick="RemovePin">Remove PIN</button>
+            </div>
+        }
+
+        @if (!string.IsNullOrWhiteSpace(pinMsg))
+        {
+            <p style="margin-top:10px;"><b>@pinMsg</b></p>
+        }
+    </div>
+</div>
+
+@code {
+    // Theme
+    string theme = "light";
+    string themeMsg = "";
+
+    // Lock toggle
+    bool lockEnabled = false;
+
+    // Pin
+    bool pinIsSet = false;
+    string pinMsg = "";
+
+    string currentPin = "";
+    string newPin = "";
+    string confirmPin = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        theme = await SettingsService.GetThemeAsync();
+        lockEnabled = await SettingsService.IsLockEnabledAsync();
+        pinIsSet = await SettingsService.IsPinSetAsync();
+    }
+
+    async Task SaveTheme()
+    {
+        themeMsg = "";
+        await SettingsService.SetThemeAsync(theme);
+        AppState.SetTheme(theme);
+        themeMsg = "Theme saved.";
+    }
+
+    async Task SaveLockSetting()
+    {
+        pinMsg = "";
+
+        await SettingsService.SetLockEnabledAsync(lockEnabled);
+
+        // refresh
+        pinIsSet = await SettingsService.IsPinSetAsync();
+
+        if (lockEnabled && !pinIsSet)
+            pinMsg = "Lock is ON, but no PIN is set. Please set a PIN.";
+        else
+            pinMsg = "Lock setting saved.";
+    }
+
+    async Task SetPin()
+    {
+        pinMsg = "";
+
+        if (string.IsNullOrWhiteSpace(newPin) || newPin.Trim().Length < 4)
+        {
+            pinMsg = "PIN must be at least 4 digits.";
+            return;
+        }
+
+        if (newPin != confirmPin)
+        {
+            pinMsg = "PIN does not match.";
+            return;
+        }
+
+        await SettingsService.SetPinAsync(newPin);
+
+        // refresh state
+        pinIsSet = await SettingsService.IsPinSetAsync();
+
+        newPin = "";
+        confirmPin = "";
+
+        pinMsg = "PIN set successfully.";
+    }
+
+    async Task ChangePin()
+    {
+        pinMsg = "";
+
+        var ok = await SettingsService.VerifyPinAsync(currentPin);
+        if (!ok)
+        {
+            pinMsg = "Current PIN is wrong.";
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(newPin) || newPin.Trim().Length < 4)
+        {
+            pinMsg = "New PIN must be at least 4 digits.";
+            return;
+        }
+
+        if (newPin != confirmPin)
+        {
+            pinMsg = "New PIN does not match.";
+            return;
+        }
+
+        await SettingsService.SetPinAsync(newPin);
+
+        // refresh
+        pinIsSet = await SettingsService.IsPinSetAsync();
+
+        currentPin = "";
+        newPin = "";
+        confirmPin = "";
+
+        pinMsg = "PIN changed successfully.";
+    }
+
+    async Task RemovePin()
+    {
+        pinMsg = "";
+
+        var ok = await SettingsService.VerifyPinAsync(currentPin);
+        if (!ok)
+        {
+            pinMsg = "Current PIN is wrong.";
+            return;
+        }
+
+        await SettingsService.ClearPinAsync();
+
+        // refresh
+        pinIsSet = await SettingsService.IsPinSetAsync();
+
+        // If PIN removed, auto turn off lock (optional but recommended)
+        if (!pinIsSet && lockEnabled)
+        {
+            lockEnabled = false;
+            await SettingsService.SetLockEnabledAsync(false);
+        }
+
+        currentPin = "";
+        newPin = "";
+        confirmPin = "";
+
+        pinMsg = "PIN removed.";
+    }
+}

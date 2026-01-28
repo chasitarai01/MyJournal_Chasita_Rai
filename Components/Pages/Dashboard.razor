@@ -1,0 +1,282 @@
+﻿@page "/dashboard"
+@inject MyJournal.Services.AnalyticsService AnalyticsService
+
+<h3>Dashboard</h3>
+
+@if (!loaded)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; max-width:900px;">
+        <div style="border:1px solid #ddd; border-radius:12px; padding:12px;">
+            <div style="font-size:12px; color:#666;">Daily Streak</div>
+            <div style="font-size:28px; font-weight:bold;">@current</div>
+        </div>
+
+        <div style="border:1px solid #ddd; border-radius:12px; padding:12px;">
+            <div style="font-size:12px; color:#666;">Longest Streak</div>
+            <div style="font-size:28px; font-weight:bold;">@longest</div>
+        </div>
+
+        <div style="border:1px solid #ddd; border-radius:12px; padding:12px;">
+            <div style="font-size:12px; color:#666;">Missed Days</div>
+            <div style="font-size:28px; font-weight:bold;">@missedCount</div>
+        </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-top:16px; max-width:900px;">
+
+        <!-- Mood Distribution -->
+        <div style="border:1px solid #ddd; border-radius:12px; padding:12px;">
+            <h4 style="margin-top:0;">Mood Distribution</h4>
+
+            @foreach (var row in moodRows)
+            {
+                <div style="margin-bottom:10px;">
+                    <div style="display:flex; justify-content:space-between;">
+                        <b>@row.Name</b>
+                        <span>@row.Count (@row.Percent.ToString("0.0")%)</span>
+                    </div>
+
+                    <div style="height:10px; background:#f1f1f1; border-radius:999px; overflow:hidden;">
+                        <div style="height:10px; width:@row.Percent%; background:#999;"></div>
+                    </div>
+                </div>
+            }
+
+            <p style="margin-top:12px;">
+                <b>Most Frequent Mood:</b> @mostMood (@mostMoodCount)
+            </p>
+        </div>
+
+        <!-- Most Used Tags -->
+        <div style="border:1px solid #ddd; border-radius:12px; padding:12px;">
+            <h4 style="margin-top:0;">Most Used Tags</h4>
+
+            @if (topTagRows.Count == 0)
+            {
+                <p>No tags used yet.</p>
+            }
+            else
+            {
+                @foreach (var t in topTagRows)
+                {
+                    <div style="margin-bottom:10px;">
+                        <div style="display:flex; justify-content:space-between;">
+                            <b>@t.Name</b>
+                            <span>@t.Count</span>
+                        </div>
+
+                        <div style="height:10px; background:#f1f1f1; border-radius:999px; overflow:hidden;">
+                            <div style="height:10px; width:@t.BarPercent%; background:#999;"></div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+
+        <!-- Category Breakdown % (THIS is what marking scheme wants) -->
+        <div style="border:1px solid #ddd; border-radius:12px; padding:12px;">
+            <h4 style="margin-top:0;">Category Breakdown (%)</h4>
+
+            @if (categoryPercentRows.Count == 0)
+            {
+                <p>No entries yet.</p>
+            }
+            else
+            {
+                @foreach (var c in categoryPercentRows)
+                {
+                    <div style="margin-bottom:10px;">
+                        <div style="display:flex; justify-content:space-between;">
+                            <b>@c.Name</b>
+                            <span>@c.Percent.ToString("0.0")%</span>
+                        </div>
+
+                        <div style="height:10px; background:#f1f1f1; border-radius:999px; overflow:hidden;">
+                            <div style="height:10px; width:@c.Percent%; background:#999;"></div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+
+        <!-- Word Count Trends -->
+        <div style="border:1px solid #ddd; border-radius:12px; padding:12px;">
+            <h4 style="margin-top:0;">Word Count Trends (Avg words per month)</h4>
+
+            @if (wordRows.Count == 0)
+            {
+                <p>No entries yet.</p>
+            }
+            else
+            {
+                @foreach (var w in wordRows)
+                {
+                    <div style="margin-bottom:10px;">
+                        <div style="display:flex; justify-content:space-between;">
+                            <b>@w.Month</b>
+                            <span>@w.Avg.ToString("0") words</span>
+                        </div>
+
+                        <div style="height:10px; background:#f1f1f1; border-radius:999px; overflow:hidden;">
+                            <div style="height:10px; width:@w.BarPercent%; background:#999;"></div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+    <!-- Missed Days list -->
+    <div style="border:1px solid #ddd; border-radius:12px; padding:12px; margin-top:16px; max-width:900px;">
+        <h4 style="margin-top:0;">Missed Days (Dates with no entries)</h4>
+
+        @if (missedDates.Count == 0)
+        {
+            <p>No missed days 🎉</p>
+        }
+        else
+        {
+            <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                @foreach (var d in missedDates.Take(60))
+                {
+                    <span style="border:1px solid #ccc; padding:6px 10px; border-radius:999px;">@d</span>
+                }
+            </div>
+
+            @if (missedDates.Count > 60)
+            {
+                <p style="margin-top:8px; font-size:12px; color:#666;">
+                    Showing first 60 missed days.
+                </p>
+            }
+        }
+    </div>
+}
+
+@code {
+    bool loaded = false;
+
+    int current, longest;
+    int missedCount;
+    List<string> missedDates = new();
+
+    // Mood distribution
+    Dictionary<string, int> moodCounts = new();
+    List<MoodRow> moodRows = new();
+
+    string mostMood = "-";
+    int mostMoodCount = 0;
+
+    // Tags
+    Dictionary<string, int> tagCounts = new();
+    int tagTotal = 0;
+    List<TagRow> topTagRows = new();
+
+    // Category Breakdown
+    Dictionary<string, int> categoryCounts = new();
+    int categoryTotal = 0;
+    List<CategoryPercentRow> categoryPercentRows = new();
+
+    // Word trend
+    Dictionary<string, double> wordAvgByMonth = new();
+    List<WordRow> wordRows = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        (current, longest, _) = await AnalyticsService.GetStreakStatsAsync();
+
+        // missed dates
+        missedDates = await AnalyticsService.MissedDatesAsync();
+        missedCount = missedDates.Count;
+
+        // mood distribution
+        moodCounts = await AnalyticsService.MoodCategoryCountsAsync();
+        var moodTotal = moodCounts.Values.Sum();
+
+        moodRows = new[] { "Positive", "Neutral", "Negative" }
+            .Select(name =>
+            {
+                moodCounts.TryGetValue(name, out var c);
+                var p = moodTotal == 0 ? 0 : (100.0 * c / moodTotal);
+                return new MoodRow { Name = name, Count = c, Percent = p };
+            })
+            .ToList();
+
+        // most frequent mood (PrimaryMood)
+        (mostMood, mostMoodCount) = await AnalyticsService.MostFrequentMoodAsync();
+
+        // Most used tags
+        (tagCounts, tagTotal) = await AnalyticsService.TagCountsAsync();
+        var maxTag = tagCounts.Count == 0 ? 1 : tagCounts.Values.Max();
+
+        topTagRows = tagCounts
+            .OrderByDescending(kv => kv.Value)
+            .Take(10)
+            .Select(kv => new TagRow
+            {
+                Name = kv.Key,
+                Count = kv.Value,
+                BarPercent = maxTag == 0 ? 0 : (100.0 * kv.Value / maxTag)
+            })
+            .ToList();
+
+        // ✅ Category Breakdown (% of entries per Category)
+        (categoryCounts, categoryTotal) = await AnalyticsService.CategoryBreakdownAsync();
+
+        categoryPercentRows = categoryCounts
+            .OrderByDescending(kv => kv.Value)
+            .Select(kv => new CategoryPercentRow
+            {
+                Name = kv.Key,
+                Percent = categoryTotal == 0 ? 0 : (100.0 * kv.Value / categoryTotal)
+            })
+            .ToList();
+
+        // word count trends
+        wordAvgByMonth = await AnalyticsService.WordCountAverageByMonthAsync();
+        var maxWord = wordAvgByMonth.Count == 0 ? 1 : wordAvgByMonth.Values.Max();
+
+        wordRows = wordAvgByMonth
+            .OrderBy(kv => kv.Key)
+            .Select(kv => new WordRow
+            {
+                Month = kv.Key,
+                Avg = kv.Value,
+                BarPercent = maxWord == 0 ? 0 : (100.0 * kv.Value / maxWord)
+            })
+            .ToList();
+
+        loaded = true;
+    }
+
+    class MoodRow
+    {
+        public string Name { get; set; } = "";
+        public int Count { get; set; }
+        public double Percent { get; set; }
+    }
+
+    class TagRow
+    {
+        public string Name { get; set; } = "";
+        public int Count { get; set; }
+        public double BarPercent { get; set; }
+    }
+
+    class CategoryPercentRow
+    {
+        public string Name { get; set; } = "";
+        public double Percent { get; set; }
+    }
+
+    class WordRow
+    {
+        public string Month { get; set; } = "";
+        public double Avg { get; set; }
+        public double BarPercent { get; set; }
+    }
+}

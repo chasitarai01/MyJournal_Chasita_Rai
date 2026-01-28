@@ -1,0 +1,23 @@
+﻿@using Markdig
+
+<label><b>Content (Markdown)</b></label>
+<textarea style="width:100%; height:220px;" value="@Value" @oninput="OnInput"></textarea>
+
+<div style="margin-top:10px; border:1px solid #ccc; padding:10px; border-radius:6px;">
+    <b>Preview</b>
+    <div>@((MarkupString)Markdown.ToHtml(Value ?? "", pipeline))</div>
+</div>
+
+@code {
+    private static readonly MarkdownPipeline pipeline =
+        new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
+
+    [Parameter] public string? Value { get; set; }
+    [Parameter] public EventCallback<string?> ValueChanged { get; set; }
+
+    private async Task OnInput(ChangeEventArgs e)
+    {
+        Value = e.Value?.ToString() ?? "";
+        await ValueChanged.InvokeAsync(Value);
+    }
+}

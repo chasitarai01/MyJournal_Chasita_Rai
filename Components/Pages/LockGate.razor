@@ -1,0 +1,117 @@
+﻿@inject MyJournal.Services.SettingsService SettingsService
+
+@if (!ready)
+{
+    <div style="position:fixed; inset:0; z-index:9999;
+                    background: linear-gradient(135deg, #1b2a4a 0%, #5b2c83 45%, #b13e6a 100%);">
+    </div>
+}
+else if (lockEnabled && pinIsSet && !unlocked)
+{
+    <div style="
+            position:fixed;
+            inset:0;
+            z-index:9999;
+            background: linear-gradient(135deg, #1b2a4a 0%, #5b2c83 45%, #b13e6a 100%);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            padding:16px;">
+
+        <div style="
+        width:min(520px, 100%);
+        background: rgba(15, 18, 35, 0.65);
+        border: 1px solid rgba(255,255,255,0.18);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius:16px;
+        padding:18px;
+        box-shadow: 0 12px 34px rgba(0,0,0,0.35);
+        color: white;">
+
+        
+
+            <h3 style="margin-top:0;">Locked</h3>
+            <p style="margin-top:6px;">Enter PIN to continue.</p>
+
+            <input type="password" style="width:100%;" @bind="pin" />
+
+            <div style="margin-top:10px; display:flex; gap:10px;">
+                <button type="button" @onclick="Unlock">Unlock</button>
+                <button type="button" @onclick="Clear">Clear</button>
+            </div>
+
+            @if (!string.IsNullOrWhiteSpace(msg))
+            {
+                <p style="margin-top:10px;"><b>@msg</b></p>
+            }
+        </div>
+    </div>
+}
+else
+{
+    @ChildContent
+}
+
+@code {
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    bool ready = false;
+
+    bool lockEnabled = false;
+    bool pinIsSet = false;
+    bool unlocked = false;
+
+    string pin = "";
+    string msg = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        await RefreshLockState();
+        ready = true;
+    }
+
+    // Optional: when you navigate, LockGate stays in Layout.
+    // If you want it to re-check each time, keep this:
+    protected override async Task OnParametersSetAsync()
+    {
+        await RefreshLockState();
+    }
+
+    private async Task RefreshLockState()
+    {
+        ready = false;
+
+        lockEnabled = await SettingsService.IsLockEnabledAsync();
+        pinIsSet = await SettingsService.IsPinSetAsync();
+
+        // if lock is enabled AND pin exists => locked
+        unlocked = !(lockEnabled && pinIsSet);
+
+        pin = "";
+        msg = "";
+
+        ready = true;
+    }
+
+    async Task Unlock()
+    {
+        msg = "";
+        var ok = await SettingsService.VerifyPinAsync(pin);
+        if (ok)
+        {
+            unlocked = true;
+            pin = "";
+        }
+        else
+        {
+            msg = "Wrong PIN.";
+        }
+    }
+
+    void Clear()
+    {
+        pin = "";
+        msg = "";
+    }
+}
